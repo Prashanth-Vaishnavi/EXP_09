@@ -1,70 +1,246 @@
-# Getting Started with Create React App
+# 🧪 Experiment 9: Frontend Integration with RBAC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### (React + Session-Based UI)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Objective
 
-### `npm start`
+To build a **React frontend** integrated with a Spring Boot RBAC backend and implement:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* User authentication from frontend
+* Session-based login handling
+* Role-based UI rendering (USER / ADMIN)
+* Secure API communication
+* Authorization testing through UI
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧩 Features Implemented
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔐 1. Login Page
 
-### `npm run build`
+* Accepts username & password
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Sends request to backend (`/api/user/profile`)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Uses HTTP Basic Authentication
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Stores credentials in `sessionStorage`:
 
-### `npm run eject`
+  * username
+  * password
+  * role
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Redirects based on role:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  * USER → `/user`
+  * ADMIN → `/admin`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 👤 2. USER Dashboard
 
-## Learn More
+* Accessible only by USER role
+* Calls:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+/api/user/profile
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Displays response from backend
+* Cannot access admin functionality
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 👑 3. ADMIN Dashboard
 
-### Analyzing the Bundle Size
+* Accessible only by ADMIN role
+* Calls:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+/api/admin/dashboard
+```
 
-### Making a Progressive Web App
+* Full access to protected endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### 🚫 4. Role-Based UI Control
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* USER:
 
-### Deployment
+  * Cannot access admin dashboard
+  * Blocked with "Access Denied"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* ADMIN:
 
-### `npm run build` fails to minify
+  * Access to all endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Unauthorized users:
+
+  * Redirected to login
+
+---
+
+### 🔄 5. Logout Functionality
+
+* Clears session:
+
+```javascript
+sessionStorage.clear();
+```
+
+* Redirects to login page
+
+---
+
+## 🔐 Role-Based Access Summary
+
+| Role         | Access                      |
+| ------------ | --------------------------- |
+| USER         | `/api/user/**`              |
+| ADMIN        | `/api/admin/**` + USER APIs |
+| Unauthorized | No access                   |
+
+---
+
+## 🌐 API Integration
+
+| Endpoint               | Access      |
+| ---------------------- | ----------- |
+| `/api/public/hello`    | Public      |
+| `/api/user/profile`    | USER, ADMIN |
+| `/api/admin/dashboard` | ADMIN only  |
+
+---
+
+## 💻 Tech Stack
+
+* React
+* Axios
+* Bootstrap
+* Material UI
+* Spring Boot (Backend from Experiment 7)
+
+---
+
+## 📸 Screenshots (Required)
+
+### 1️⃣ Login UI
+
+![Login](screenshots/01-login-page.png)
+
+---
+
+### 2️⃣ USER accessing user endpoint
+
+![User](screenshots/02-user-dashboard.png)
+
+---
+
+### 3️⃣ USER denied access to ADMIN
+
+![Denied](screenshots/03-user-denied-admin.png)
+
+---
+
+### 4️⃣ ADMIN accessing admin endpoint
+
+![Admin](screenshots/04-admin-dashboard.png)
+
+---
+
+### 5️⃣ Session Storage (Role Stored)
+
+![Session](screenshots/05-session-storage.png)
+
+---
+
+## 🧪 Testing
+
+### ✅ USER Login
+
+```bash
+username: user1
+password: password123
+```
+
+* Redirect → `/user`
+* Can access user API
+* Cannot access admin API
+
+---
+
+### ✅ ADMIN Login
+
+```bash
+username: admin1
+password: password123
+```
+
+* Redirect → `/admin`
+* Full access
+
+---
+
+### ❌ Unauthorized Access
+
+* No login → 401 Unauthorized
+* USER accessing admin → 403 Forbidden
+
+---
+
+## ⚙️ Project Structure
+
+```bash
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── Login.js
+│   │   ├── UserDashboard.js
+│   │   └── AdminDashboard.js
+```
+
+---
+
+## ▶️ How to Run
+
+### Backend (from Experiment 7)
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+
+---
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+---
+
+## 🧠 Key Concepts Learned
+
+* Frontend integration with secured backend
+* Role-Based Access Control (RBAC)
+* Session-based authentication using `sessionStorage`
+* Protected API calls using Axios
+* UI restriction based on roles
+
+---
+
+## 📘 Conclusion
+
+This experiment demonstrates how a **React frontend can enforce role-based access control** by integrating with a secured Spring Boot backend, ensuring both API-level and UI-level security.
+
+---
+
+## 👨‍💻 Author
+
+**P Vaishnavi**
