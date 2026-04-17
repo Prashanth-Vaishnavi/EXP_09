@@ -1,4 +1,4 @@
-<img width="692" height="468" alt="Screenshot 2026-04-17 234311" src="https://github.com/user-attachments/assets/b3d90156-a356-459b-a6e4-aa62db66602a" /># 🧪 Experiment 9: Frontend Integration with RBAC
+# 🧪 Experiment 9: Frontend Integration with RBAC
 
 ### (React + Session-Based UI)
 
