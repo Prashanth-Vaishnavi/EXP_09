@@ -1,4 +1,4 @@
-# 🧪 Experiment 9: Frontend Integration with RBAC
+<img width="692" height="468" alt="Screenshot 2026-04-17 234311" src="https://github.com/user-attachments/assets/b3d90156-a356-459b-a6e4-aa62db66602a" /># 🧪 Experiment 9: Frontend Integration with RBAC
 
 ### (React + Session-Based UI)
 
@@ -129,31 +129,39 @@ sessionStorage.clear();
 
 ### 1️⃣ Login UI
 
-![Login](screenshots/01-login-page.png)
+<img width="1919" height="1031" alt="Screenshot 2026-04-17 234732" src="https://github.com/user-attachments/assets/3c4e31c7-2f4e-44be-af68-d343566f66f0" />
+
 
 ---
 
 ### 2️⃣ USER accessing user endpoint
 
-![User](screenshots/02-user-dashboard.png)
+<img width="1919" height="532" alt="Screenshot 2026-04-17 234756" src="https://github.com/user-attachments/assets/46aeb893-8f8c-4fd0-a80d-0c25262023a2" />
+
+
 
 ---
 
 ### 3️⃣ USER denied access to ADMIN
 
-![Denied](screenshots/03-user-denied-admin.png)
+<img width="1919" height="435" alt="Screenshot 2026-04-17 234804" src="https://github.com/user-attachments/assets/9686deeb-402c-48ce-b043-d4ef9063a421" />
+
 
 ---
 
 ### 4️⃣ ADMIN accessing admin endpoint
 
-![Admin](screenshots/04-admin-dashboard.png)
+<img width="1919" height="496" alt="Screenshot 2026-04-17 234817" src="https://github.com/user-attachments/assets/62e9c2ef-efdb-4865-aefc-01e1c27c00eb" />
+<img width="1919" height="415" alt="Screenshot 2026-04-17 234822" src="https://github.com/user-attachments/assets/cddf70f0-a8fb-447d-a515-f608265e7b56" />
+
 
 ---
 
 ### 5️⃣ Session Storage (Role Stored)
 
-![Session](screenshots/05-session-storage.png)
+<img width="692" height="468" alt="Screenshot 2026-04-17 234311" src="https://github.com/user-attachments/assets/1a68eff0-97b1-4c1f-8572-2a34d437b84c" />
+
+<img width="1919" height="548" alt="Screenshot 2026-04-17 234901" src="https://github.com/user-attachments/assets/6d27253d-119d-4f38-a6b9-7d7f07fa71c2" />
 
 ---
 
